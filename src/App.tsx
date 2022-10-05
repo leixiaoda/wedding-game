@@ -7,7 +7,7 @@ import './App.less';
 function App() {
   const [status, setStatus] = useState(NetworkStatus.UNKNOWN);
   const [result, setResult] = useState('');
-  let editorValue = useRef('public class WeddingGame {\n    public static void main(String []args) {\n        int[] array1 = new int[]{ 2312, 43, 875, 3486, 976, 468, 578, 70 };\n        int[] array2 = new int[]{ 125, 4326, 3721, 730, 2175, 2865, 1599 };\n        System.out.println("Hello World");\n    }\n}');
+  let editorValue = useRef('public class WeddingGame {\n    public static void main(String []args) {\n        int[] a = new int[]{ 2312, 43, 875, 3486, 976, 468, 578, 70 };\n        int[] b = new int[]{ 125, 4326, 3721, 730, 2175, 2865, 1599 };\n        System.out.println("Hello World");\n    }\n}');
 
   const sendRequest = (code: string) => {
     const body = new URLSearchParams();
@@ -41,10 +41,10 @@ function App() {
 
   const renderDesc = () => (
     <div className='desc'>
-      <p>给定 array1、array2 两个数组，要求依次计算</p>
-      <p>array1[0] - array2[0] + array1[1] - array2[1] + ... + array1[n] - array2[n]</p>
+      <p>给定 a、b 两个数组，要求依次计算</p>
+      <p>a[0] - b[0] + a[1] - b[1] + ... + a[n] - b[n]</p>
       <p>注意：</p>
-      <p>1. 减 array2[n] 时，若结果小于 0，则跳过该数字，即: array1[n] + array1[n + 1]</p>
+      <p>1. 减 b[n] 时，若结果小于 0，则跳过该数字，即: ... + a[n] + a[n + 1] - b[n + 1] + ...</p>
       <p>2. 两个数组长度不一定相同，均遍历完才为结束</p>
     </div>
   );
@@ -57,7 +57,7 @@ function App() {
     return (
       <MonacoEditor
         className='editor'
-        height="500px"
+        height="450px"
         language="java"
         value={editorValue.current}
         options={{
