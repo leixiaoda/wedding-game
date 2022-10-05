@@ -40,7 +40,7 @@ function App() {
   }
 
   const renderDesc = () => (
-    <div className='desc'>
+    <div className="desc">
       <p>给定 a、b 两个数组，要求依次计算</p>
       <p>a[0] - b[0] + a[1] - b[1] + ... + a[n] - b[n]</p>
       <p>注意：</p>
@@ -56,7 +56,7 @@ function App() {
   const renderEditor = () => {
     return (
       <MonacoEditor
-        className='editor'
+        className="editor"
         height="450px"
         language="java"
         value={editorValue.current}
@@ -85,11 +85,11 @@ function App() {
 
   const renderConsoleContent = () => {
     let isError = status === NetworkStatus.ERROR;
-    let customStr = 'I LOVE ';
+    let customStr: string;
     if (result === `${RIGHT_ANSWER}\n`) {
-      customStr += 'Yi AnChao!';
+      customStr = '❤️ I LOVE Yi AnChao! ❤️';
     } else {
-      customStr += DISTRACTORS[Math.floor(Math.random() * DISTRACTORS.length)] + '!';
+      customStr = `I LOVE ${DISTRACTORS[Math.floor(Math.random() * DISTRACTORS.length)]}!`;
       isError = true;
     }
     return (
@@ -107,9 +107,9 @@ function App() {
   const renderConsole = () => {
     const isPending = status === NetworkStatus.PENDING;
     return (
-      <div className='console'>
+      <div className="console">
         <button
-          className='commit-btn'
+          className="commit-btn"
           onClick={handleClickCommitBtn}
           disabled={isPending}
         >
@@ -124,7 +124,7 @@ function App() {
     <div className="App">
       {renderDesc()}
       {renderEditor()}
-      <div className='divider' />
+      <div className="divider" />
       {renderConsole()}
     </div>
   );
