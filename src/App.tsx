@@ -42,10 +42,10 @@ function App() {
   const renderDesc = () => (
     <div className='desc'>
       <p>给定 array1、array2 两个数组，要求依次计算</p>
-      <p>array1[0] - array2[0] + array1[1] - array2[1] + ...</p>
+      <p>array1[0] - array2[0] + array1[1] - array2[1] + ... + array1[n] - array2[n]</p>
       <p>注意：</p>
-      <p>1. 减 array2[n] 时，若结果小于 0，则跳过该数字，即: array1[n - 1] + array1[n + 1]</p>
-      <p>2. 两个数组长度不一定相同，均遍历完为结束</p>
+      <p>1. 减 array2[n] 时，若结果小于 0，则跳过该数字，即: array1[n] + array1[n + 1]</p>
+      <p>2. 两个数组长度不一定相同，均遍历完才为结束</p>
     </div>
   );
 
@@ -84,18 +84,18 @@ function App() {
   };
 
   const renderConsoleContent = () => {
+    let isError = status === NetworkStatus.ERROR;
     let customStr = 'I LOVE ';
     if (result === `${RIGHT_ANSWER}\n`) {
       customStr += 'Yi AnChao!';
     } else {
       customStr += DISTRACTORS[Math.floor(Math.random() * DISTRACTORS.length)] + '!';
+      isError = true;
     }
     return (
-      <div className="console--content">
+      <div className={classNames('console--content', { isError })}>
         {status !== NetworkStatus.PENDING && (
-          <div className={classNames('output', {
-            isError: status === NetworkStatus.ERROR,
-          })}>
+          <div className="output">
             {result}
           </div>
         )}
@@ -123,7 +123,6 @@ function App() {
   return (
     <div className="App">
       {renderDesc()}
-      <div className='divider' />
       {renderEditor()}
       <div className='divider' />
       {renderConsole()}
